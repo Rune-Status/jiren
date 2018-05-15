@@ -1,5 +1,11 @@
 # Jiren
-A standalone high performance on-demand file streaming service aimed for RuneTek 3. Jiren takes full advantage of the Actor Model through Akka to give users the blazing fast file streaming they need for their RuneScape game service. Besides the incredible performance Jiren offers, it is also extremely easy to use and is cache API independent. This means that you simply provide a cache API you would like to use and the corresponding asset loader. Sample asset loader implementations using the most popular cache API's can be found below.
+A standalone high performance on-demand file streaming service aimed for RuneTek 3. Jiren takes full advantage of the Actor Model through Akka to give users the blazing fast file streaming they need for their RuneScape game service. Besides the incredible performance Jiren offers, it is also:
+
+- Extremely easy to use!
+- Client revision independent (Though limited to RuneTek 3)
+- Cache API independent
+
+You are free to use any cache API you are used to using in your project. All Jiren requires is a simple asset loading strategy. Sample implementations for popular cache API's are provided below.
 
 # Installation
 TODO
@@ -20,3 +26,6 @@ final class OpenRSAssetLoader(cache: Cache) extends AssetLoader {
     }
 }
 ```
+
+## Deployment
+As Jiren is completely standalone, it can be deployed anywhere. However, this means that Jiren can not run on the same instance as your game service. Clients must either directly connect to this service or a proxy server (which is built by you) that communicates with Jiren.
