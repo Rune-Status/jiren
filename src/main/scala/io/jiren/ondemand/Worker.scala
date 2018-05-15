@@ -25,7 +25,7 @@ object Worker {
   case class ServeAsset(archive: Int, file: Int, setting: Int, fileData: ByteBuffer)
 
   def props(client: ActorRef, fileCache: ActorRef) =
-    Props(new Worker(client, fileCache)).withMailbox("runescape.ondemand-worker-mailbox")
+    Props(new Worker(client, fileCache)).withMailbox("jiren.ondemand-worker-mailbox")
 }
 
 /** A dedicated file streaming worker that fetches asset files and serves them to the client.
