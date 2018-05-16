@@ -14,10 +14,19 @@ TODO
 To start a new Jiren instance:
 
 ```
-Jiren.create("RuneScape", 43595, 2048, new OpenRSAssetLoader(cache));
+Jiren.create("RuneScape", 43595, 2048, 165, new OpenRSAssetLoader(cache));
 ```
 
-The value `43595` represents the port that Jiren will listen at for clients. The value `2048` is the amount of clients Jiren will serve assets to concurrently, at most. This means that it will start rejecting clients once that amount of clients are currently being served.
+Now what are these numbers passed as parameters?
+
+`43595`<br>
+Represents the port that Jiren will listen at for clients.
+
+`2048`<br>
+The amount of clients Jiren will serve assets to concurrently, at most. This means that it will start rejecting clients once that amount of clients are currently being served.
+
+`165`<br>
+The accepted client revision the assets are for.
 
 ## Asset Loaders
 OpenRS:
@@ -34,4 +43,4 @@ final class OpenRSAssetLoader(cache: Cache) extends AssetLoader {
 ```
 
 ## Deployment
-As Jiren is completely standalone, it can be deployed anywhere. However, it is NOT recommended to have Jiren run on the same application instance as your game service. Streaming files creates a lot of garbage that could have an impact on your game service and should therefore be separated.
+As Jiren is completely standalone, it can be deployed anywhere. However, it is NOT recommended to have Jiren run on the same application instance as your game service. Streaming files creates a lot of garbage that could have an impact on your game service and should therefore be separated. Note that it is possible for Jiren to act as a mere backend service in your distributed system where a proxy server is connected to Jiren and forwards data to the actual clients.
