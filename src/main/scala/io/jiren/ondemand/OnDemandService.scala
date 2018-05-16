@@ -16,7 +16,7 @@ final class OnDemandService(ctx: OnDemandContext) extends Actor with ActorLoggin
   val assetFileCache = context.actorOf(AssetFileCache.props(ctx.assetLoader), name = "assets-cache")
   val workerMaster = context.actorOf(WorkerMaster.props(ctx.workerLimit, assetFileCache), name = "worker-master")
 
-  val clientMaster = context.actorOf(ClientMaster.props(workerMaster), name = "client-master")
+  val clientMaster = context.actorOf(ClientMaster.props(workerMaster, ctx.clientRev), name = "client-master")
   val tcpListener = context.actorOf(TcpListener.props(self, clientMaster), name = "tcp-listener")
 
   override def preStart() = {

@@ -8,5 +8,6 @@ import java.net.InetSocketAddress
 case class OnDemandContext(
   address: InetSocketAddress,
   workerLimit: Int,
+  clientRev: Int,
   assetLoader: AssetLoader
 )

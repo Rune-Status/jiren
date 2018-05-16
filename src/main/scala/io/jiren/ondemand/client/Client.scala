@@ -15,12 +15,12 @@ import scala.collection.immutable
 
 /** A companion object to [[Client]]. */
 object Client {
-  def props(connection: ActorRef, workerMaster: ActorRef) =
-    Props(new Client(connection, workerMaster))
+  def props(connection: ActorRef, workerMaster: ActorRef, clientRev: Int) =
+    Props(new Client(connection, workerMaster, clientRev))
 }
 
 /** @author Sino */
-final class Client(connection: ActorRef, workerMaster: ActorRef) extends Actor {
+final class Client(connection: ActorRef, workerMaster: ActorRef, clientRev: Int) extends Actor {
   var lastRead = ByteString.empty
 
   var pending = immutable.Seq.empty[ByteString]
@@ -40,7 +40,7 @@ final class Client(connection: ActorRef, workerMaster: ActorRef) extends Actor {
         val opcode = buffer.get() & 0xFF
         val revision = buffer.getInt()
         if (opcode == 15) {
-          if (revision == 165) {
+          if (revision == clientRev) {
             workerMaster ! FetchWorker(self)
 
             lastRead = ByteString.empty
