@@ -5,6 +5,6 @@ import java.nio.ByteBuffer
 /** Loads an asset file.
   * @author Sino
   */
-trait AssetLoader {
+abstract class AssetLoader {
   def load(archive: Int, file: Int): ByteBuffer
 }
