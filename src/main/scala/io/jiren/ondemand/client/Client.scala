@@ -130,7 +130,16 @@ final class Client(connection: ActorRef, workerMaster: ActorRef, clientRev: Int)
       out.putShort(file.toShort)
       out.put(setting.toByte)
       out.putInt(fileData.limit())
-      out.put(fileData)
+
+      var offset = 0
+      while (fileData.hasRemaining) {
+        if (offset == 512) {
+          out.put(255.toByte)
+        }
+
+        out.put(fileData.get())
+        offset = offset + 1
+      }
 
       flush(out.toByteString)
 
