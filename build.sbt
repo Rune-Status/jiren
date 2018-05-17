@@ -11,6 +11,11 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion
   )
 
-  akkaDeps
+  val scalaTestVersion = "3.1.0-SNAP5"
+  val scalaTestDeps = Seq(
+    "org.scalatest" %% "scalatest" % scalaTestVersion % Test
+  )
+
+  akkaDeps ++ scalaTestDeps
 }
         
